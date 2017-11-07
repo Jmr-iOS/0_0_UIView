@@ -10,8 +10,8 @@
 		D039B4BA1BF4D7950024005F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039B4B91BF4D7950024005F /* AppDelegate.swift */; };
 		D039B4BC1BF4D7950024005F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D039B4BB1BF4D7950024005F /* ViewController.swift */; };
 		D039B4C11BF4D7950024005F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D039B4C01BF4D7950024005F /* Assets.xcassets */; };
-		D0E6D3901DA035BE00FE8279 /* CustomSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6D38F1DA035BE00FE8279 /* CustomSubview.swift */; };
-		D0E6D3941DA038CB00FE8279 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E6D3931DA038CB00FE8279 /* CustomView.swift */; };
+		D0B51C0C1FB1303C005A1916 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B51C0A1FB1303B005A1916 /* CustomView.swift */; };
+		D0B51C0D1FB1303C005A1916 /* CustomSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B51C0B1FB1303C005A1916 /* CustomSubview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,8 +20,8 @@
 		D039B4BB1BF4D7950024005F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "0_0 - UIView/ViewController.swift"; sourceTree = "<group>"; };
 		D039B4C01BF4D7950024005F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D039B4C51BF4D7950024005F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0E6D38F1DA035BE00FE8279 /* CustomSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSubview.swift; path = "0_0 - UIView/CustomSubview.swift"; sourceTree = "<group>"; };
-		D0E6D3931DA038CB00FE8279 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomView.swift; path = "0_0 - UIView/CustomView.swift"; sourceTree = "<group>"; };
+		D0B51C0A1FB1303B005A1916 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomView.swift; path = "../../../../../Ref/Libraries/Programmatic UI/CustomView.swift"; sourceTree = "<group>"; };
+		D0B51C0B1FB1303C005A1916 /* CustomSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSubview.swift; path = "../../../../../Ref/Libraries/Programmatic UI/CustomSubview.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,10 +38,9 @@
 		D039B4AD1BF4D7950024005F = {
 			isa = PBXGroup;
 			children = (
+				D0B51C091FB13034005A1916 /* Lib */,
 				D039B4B91BF4D7950024005F /* AppDelegate.swift */,
 				D039B4BB1BF4D7950024005F /* ViewController.swift */,
-				D0E6D3931DA038CB00FE8279 /* CustomView.swift */,
-				D0E6D38F1DA035BE00FE8279 /* CustomSubview.swift */,
 				D039B4B81BF4D7950024005F /* Base */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +63,15 @@
 			);
 			name = Base;
 			path = "0_0 - UIView";
+			sourceTree = "<group>";
+		};
+		D0B51C091FB13034005A1916 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				D0B51C0B1FB1303C005A1916 /* CustomSubview.swift */,
+				D0B51C0A1FB1303B005A1916 /* CustomView.swift */,
+			);
+			path = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E6D3901DA035BE00FE8279 /* CustomSubview.swift in Sources */,
-				D0E6D3941DA038CB00FE8279 /* CustomView.swift in Sources */,
+				D0B51C0C1FB1303C005A1916 /* CustomView.swift in Sources */,
 				D039B4BC1BF4D7950024005F /* ViewController.swift in Sources */,
+				D0B51C0D1FB1303C005A1916 /* CustomSubview.swift in Sources */,
 				D039B4BA1BF4D7950024005F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
