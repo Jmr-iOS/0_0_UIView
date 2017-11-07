@@ -5,10 +5,10 @@ import UIKit
 class CustomView : UIView {
     
     init() {
-        super.init(frame: UIScreen.mainScreen().bounds);
+        super.init(frame: UIScreen.main.bounds);
         
         //for debug validation
-        self.backgroundColor = UIColor.blueColor();
+        self.backgroundColor = UIColor.blue;
         print("My Custom Init");
         
         return;

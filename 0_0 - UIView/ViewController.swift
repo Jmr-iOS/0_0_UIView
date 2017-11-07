@@ -48,17 +48,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         //View Two
         self.viewTwo = UIView();
-        self.viewTwo.backgroundColor = UIColor.blueColor();
+        self.viewTwo.backgroundColor = UIColor.blue;
         self.viewTwo.frame = self.view.frame;
         
         self.addLabel(self.viewTwo, dispStr: "View 2", yCoord: 60);
         self.addSubviewButton(self.viewTwo, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
 
         self.viewOne.frame = self.view.frame;
-        self.viewTwo.frame = CGRectMake(self.view.frame.width,
-                                        0,
-                                        self.view.frame.width,
-                                        self.view.frame.height);       /* init off-screen                                           */
+        self.viewTwo.frame = CGRect(x: self.view.frame.width,
+                                        y: 0,
+                                        width: self.view.frame.width,
+                                        height: self.view.frame.height);       /* init off-screen                                           */
 
         self.view.addSubview(self.viewOne);                            /* add em both!                                              */
         self.view.addSubview(self.viewTwo);
@@ -73,16 +73,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.scrollView = UIScrollView.init(frame: self.view.frame);
         
-        self.scrollView.backgroundColor = UIColor.greenColor();
+        self.scrollView.backgroundColor = UIColor.green;
         
-        self.scrollView.frame = CGRectMake(self.view.frame.width,
-                                           0,
-                                           self.view.frame.width,       /* init off-screen                                           */
-                                           scrollViewHeight);
+        self.scrollView.frame = CGRect(x: self.view.frame.width,
+                                           y: 0,
+                                           width: self.view.frame.width,       /* init off-screen                                           */
+                                           height: scrollViewHeight);
         
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.scrollView.frame.height);
         
-        self.scrollView.userInteractionEnabled = true;
+        self.scrollView.isUserInteractionEnabled = true;
         
         self.addLabel(self.scrollView, dispStr: "ScrollView", yCoord: 60);
         
@@ -107,12 +107,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let someLabel : UILabel = UILabel(frame: CGRect(x:0,y:0,width:self.view.frame.width,height:popupHeight));
         someLabel.font  =   UIFont(name: "HelveticaNeue", size: 17);
         someLabel.text  =   "Test Message - A nice and good message";
-        someLabel.textColor     = UIColor.whiteColor();
-        someLabel.textAlignment = NSTextAlignment.Center;
+        someLabel.textColor     = UIColor.white;
+        someLabel.textAlignment = NSTextAlignment.center;
         
         self.popupView.addSubview(someLabel);
         
-        self.popupView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.height, self.view.frame.width, popupHeight);
+        self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: popupHeight);
  
         return;
     }
@@ -131,7 +131,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     
-    func isViewInFront(viewSelection : Int) -> Bool {
+    func isViewInFront(_ viewSelection : Int) -> Bool {
         
         let viewOne_x    = self.viewOne.frame.origin.x;
         let viewTwo_x    = self.viewTwo.frame.origin.x;
@@ -162,12 +162,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     // View Numbers 1=View One, 2=View Two, 3=ScrollView
-    func pick_view(viewSelection : Int) {
+    func pick_view(_ viewSelection : Int) {
         
         if(viewSelection == 2) {
             self.view.addSubview(viewTwo);
         } else if (viewSelection == 3) {
-            self.scrollView.setContentOffset(CGPointMake(0, 0), animated: false);           //reset view origin before load!
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false);           //reset view origin before load!
             self.view.addSubview(scrollView);
         }
         
@@ -176,7 +176,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let animDur_s : Double = 0.5;
         let animDel_s : Double = 0.5;
         
-        UIView.animateWithDuration(animDur_s, delay: animDel_s, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animate(withDuration: animDur_s, delay: animDel_s, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
             
             var newView2InFront      : Bool = (self.viewTwo.frame.origin.x == 0);
             var newScrollViewInFront : Bool = (self.scrollView.frame.origin.x == 0);
@@ -203,20 +203,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if(newView2InFront == true) {
                     
                     self.viewOne.frame = self.view.frame;
-                    self.viewTwo.frame = CGRectMake(self.view.frame.width,
-                        0,
-                        self.view.frame.width,
-                        self.view.frame.height);                    /* init off-screen                                              */
+                    self.viewTwo.frame = CGRect(x: self.view.frame.width,
+                        y: 0,
+                        width: self.view.frame.width,
+                        height: self.view.frame.height);                    /* init off-screen                                              */
                 }
                 
                 //if scrollview in front
                 if(newScrollViewInFront == true) {
                     
                     self.viewOne.frame = self.view.frame;
-                    self.scrollView.frame = CGRectMake(self.view.frame.width,
-                        0,
-                        self.view.frame.width,
-                        self.view.frame.height);                    /* init off-screen                                              */
+                    self.scrollView.frame = CGRect(x: self.view.frame.width,
+                        y: 0,
+                        width: self.view.frame.width,
+                        height: self.view.frame.height);                    /* init off-screen                                              */
                 }
                 
                 newScrollViewInFront = false;
@@ -228,12 +228,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if(viewSelection == 2) {        /* Slide View 2 into view                                                           */
                     print("sliding view 2 in completion!");
                     
-                    self.viewOne.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height);
+                    self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
                     
                 } else {                        /* Slide View 2 out of view                                                         */
                     print("sliding view 2 out completion!");
                     
-                    self.viewTwo.frame = CGRectMake(self.view.frame.width, 0, self.view.frame.width, self.view.frame.height); //TEMP
+                    self.viewTwo.frame = CGRect(x: self.view.frame.width, y: 0, width: self.view.frame.width, height: self.view.frame.height); //TEMP
                 }
         });
         
@@ -241,27 +241,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     //open bring pop-up from bottom
-    func loadPopup(dir : Bool) {
+    func loadPopup(_ dir : Bool) {
 
         if(dir == true) {
             self.view.addSubview(self.popupView);
 
-            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
             
                     print("sliding popup in!");
-                    self.popupView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.height-self.popupHeight, self.view.frame.width, self.popupHeight);
+                    self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height-self.popupHeight, width: self.view.frame.width, height: self.popupHeight);
             
                 }, completion: { (finished: Bool) -> Void in
                         print("sliding popup in completion!");
-                        self.viewOne.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height);
+                        self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
             });
         } else {
             print("off!");
-            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                 
                 print("sliding popup out");
-                self.viewOne.frame = UIScreen.mainScreen().bounds;
-                self.popupView.frame = CGRectMake(0, UIScreen.mainScreen().bounds.height, self.view.frame.width, self.popupHeight);
+                self.viewOne.frame = UIScreen.main.bounds;
+                self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: self.popupHeight);
                 
                 }, completion: { (finished: Bool) -> Void in
                     print("sliding popup out completion");
@@ -298,11 +298,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func addLabel(aView: UIView, dispStr : String, yCoord : CGFloat) {
+    func addLabel(_ aView: UIView, dispStr : String, yCoord : CGFloat) {
         
         let anotherView : UIView = UIView(frame: CGRect(x: 20, y:yCoord, width: 120, height: 50));
         
-        anotherView.backgroundColor = UIColor.grayColor();
+        anotherView.backgroundColor = UIColor.gray;
         
         anotherView.layer.cornerRadius = 15;
         
@@ -310,8 +310,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         someLabel.font  =   UIFont(name: "HelveticaNeue", size: 23);
         someLabel.text  =   dispStr;
-        someLabel.textColor     = UIColor.whiteColor();
-        someLabel.textAlignment = NSTextAlignment.Center;
+        someLabel.textColor     = UIColor.white;
+        someLabel.textAlignment = NSTextAlignment.center;
         
         anotherView.addSubview(someLabel);
         
@@ -321,21 +321,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func addSubviewButton(aView: UIView, return_msg: String, action_fcn : Selector) {
+    func addSubviewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
-        let newButton : UIButton = UIButton(type: UIButtonType.RoundedRect);
+        let newButton : UIButton = UIButton(type: UIButtonType.roundedRect);
         
         newButton.translatesAutoresizingMaskIntoConstraints = true;                     /* must be true for center to work          */
         
-        newButton.setTitle(return_msg,      forState: UIControlState.Normal);
-        newButton.backgroundColor = UIColor.whiteColor();
+        newButton.setTitle(return_msg,      for: UIControlState());
+        newButton.backgroundColor = UIColor.white;
         
         newButton.sizeToFit();
-        newButton.center = CGPointMake((UIScreen.mainScreen().bounds.width)/2, 250);    /* must call after it's sized or won't work!*/
+        newButton.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 250);    /* must call after it's sized or won't work!*/
         newButton.frame = nudgeTextFrame(newButton.frame, width_expand: 10);
         
         //actions
-        newButton.addTarget(self, action: action_fcn, forControlEvents:  .TouchUpInside);
+        newButton.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
         //add!
         aView.addSubview(newButton);
@@ -344,21 +344,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func addScrollViewButton(aView: UIView, return_msg: String, action_fcn : Selector) {
+    func addScrollViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
-        let newButton2 : UIButton = UIButton(type: UIButtonType.RoundedRect);
+        let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
         
         newButton2.translatesAutoresizingMaskIntoConstraints = true;                     /* must be true for center to work          */
         
-        newButton2.setTitle(return_msg,      forState: UIControlState.Normal);
-        newButton2.backgroundColor = UIColor.whiteColor();
+        newButton2.setTitle(return_msg,      for: UIControlState());
+        newButton2.backgroundColor = UIColor.white;
         
         newButton2.sizeToFit();
-        newButton2.center = CGPointMake((UIScreen.mainScreen().bounds.width)/2, 500);    /* must call after it's sized or won't work!*/
+        newButton2.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 500);    /* must call after it's sized or won't work!*/
         newButton2.frame = nudgeTextFrame(newButton2.frame, width_expand: 20);
         
         //actions
-        newButton2.addTarget(self, action: action_fcn, forControlEvents:  .TouchUpInside);
+        newButton2.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
         //add!
         aView.addSubview(newButton2);
@@ -367,21 +367,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     
-    func addPopupViewButton(aView: UIView, return_msg: String, action_fcn : Selector) {
+    func addPopupViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
-        let newButton2 : UIButton = UIButton(type: UIButtonType.RoundedRect);
+        let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
         
         newButton2.translatesAutoresizingMaskIntoConstraints = true;                     /* must be true for center to work          */
         
-        newButton2.setTitle(return_msg,      forState: UIControlState.Normal);
-        newButton2.backgroundColor = UIColor.whiteColor();
+        newButton2.setTitle(return_msg,      for: UIControlState());
+        newButton2.backgroundColor = UIColor.white;
         
         newButton2.sizeToFit();
-        newButton2.center = CGPointMake((UIScreen.mainScreen().bounds.width)/2, 600);    /* must call after it's sized or won't work!*/
+        newButton2.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 600);    /* must call after it's sized or won't work!*/
         newButton2.frame = nudgeTextFrame(newButton2.frame, width_expand: 20);
         
         //actions
-        newButton2.addTarget(self, action: action_fcn, forControlEvents:  .TouchUpInside);
+        newButton2.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
         //add!
         aView.addSubview(newButton2);
@@ -391,30 +391,30 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     //@brief    nudge the width of a text button's frame to fit the text
-    func nudgeTextFrame(origFrame : CGRect, width_expand : CGFloat) -> CGRect {
+    func nudgeTextFrame(_ origFrame : CGRect, width_expand : CGFloat) -> CGRect {
 
         let size : CGFloat = origFrame.width + width_expand;
         
-        let newFrame : CGRect = CGRectMake(origFrame.origin.x - (width_expand/2), origFrame.origin.y, size, origFrame.height);
+        let newFrame : CGRect = CGRect(x: origFrame.origin.x - (width_expand/2), y: origFrame.origin.y, width: size, height: origFrame.height);
 
         return newFrame;
     }
 
 
-    func myPrimaryTapResponse(sender: UITapGestureRecognizer) {
+    func myPrimaryTapResponse(_ sender: UITapGestureRecognizer) {
         print("Bam here it is!!!!");
         //let tappedView = sender.view as UIView!;
         return;
     }
     
     
-    func myPrimaryTapResponse2(sender: UITapGestureRecognizer) {
+    func myPrimaryTapResponse2(_ sender: UITapGestureRecognizer) {
         print("Pop???");
         self.loadPopup(false);
         return;
     }
     
-    func press_launch(sender: UIButton!) {
+    func press_launch(_ sender: UIButton!) {
         
         print("\(sender.titleLabel!.text!) was pressed and press_launch called");
         
@@ -424,7 +424,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func press_scrollLaunch(sender: UIButton!) {
+    func press_scrollLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!");
         
         self.pick_view(3);
@@ -433,7 +433,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func press_return(sender: UIButton!) {
+    func press_return(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_return called");
         
         self.pick_view(1);
@@ -441,7 +441,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return;
     }
     
-    func press_popupLaunch(sender: UIButton!) {
+    func press_popupLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_popupLaunch called!");
 
         self.loadPopup(true);
