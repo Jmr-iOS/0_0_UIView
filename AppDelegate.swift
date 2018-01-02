@@ -1,13 +1,21 @@
-//
-//  AppDelegate.swift
-//  0_0 - Empty Template (Swift)
-//
-//  URL: http://stackoverflow.com/questions/24046898/how-do-i-create-a-new-swift-project-without-using-storyboards
-//  URL: http://stackoverflow.com/questions/24030348/how-to-create-a-button-programmatically
-//  URL: http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
-//
-
+/************************************************************************************************************************************/
+/** @file       AppDelegate.swift
+ *  @project    0_0 - UIView
+ *  @brief      x
+ *  @details    x
+ *
+ *  @notes      x
+ *
+ *  @section    Opens
+ *      none current
+ *
+ *     @section    Legal Disclaimer
+ *             All contents of this source file and/or any other Jaostech related source files are the explicit property on Jaostech
+ *             Corporation. Do not distribute. Do not copy.
+ */
+/************************************************************************************************************************************/
 import UIKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.makeKeyAndVisible();
         
-        print("AppDelegate.application():          Application launch complete");
+        print("AppDelegate.application():          application launch complete");
         
         return true;
     }
