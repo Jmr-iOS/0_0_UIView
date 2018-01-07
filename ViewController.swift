@@ -37,29 +37,59 @@ import UIKit
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    //UI
     var viewOne   : CustomView!;
     var viewTwo   : UIView!;
     var viewThree : UIView!;
-    
     var popupView  : UIView!;
     var scrollView : UIScrollView!;
     
+    //Constants
     let popupHeight : CGFloat = 35;
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        override func viewDidLoad()
+     *  @brief      after view has loaded
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        //Init UI
         self.genBasicViews();
         self.genScrollView();
         self.genUpperBorderedView();
         self.genPopup();
         self.add_primary_tapResponse();
-        
+
         return;
+    }
+
+    
+    /********************************************************************************************************************************/
+    /** @fcn        override func viewDidAppear(_ animated: Bool)
+     *  @brief      after view has appeared
+     *  @details    used to set orientation if needed
+     *
+     *  @section    Orientations
+     *      landscapeLeft  - bott is right of screen
+     *      portrait       - bott is bott of screen
+     */
+    /********************************************************************************************************************************/
+    override func viewDidAppear(_ animated: Bool) {
+        let value = UIInterfaceOrientation.portrait.rawValue;
+        UIDevice.current.setValue(value, forKey: "orientation");
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        genBasicViews()
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func genBasicViews() {
         
         //View One
@@ -94,6 +124,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        genScrollView()
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func genScrollView() {
         
         let scrollViewHeight : CGFloat = 3 * self.view.frame.height;
@@ -125,6 +161,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        genPopup()
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func genPopup() {
         
         //Popup View (from bottom
@@ -145,6 +187,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        genUpperBorderedView()
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func genUpperBorderedView() {
 
         //Generate the View
@@ -157,7 +205,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    
+    /********************************************************************************************************************************/
+    /** @fcn        isViewInFront(_ viewSelection : Int) -> Bool
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func isViewInFront(_ viewSelection : Int) -> Bool {
         
         let viewOne_x    = self.viewOne.frame.origin.x;
@@ -188,6 +241,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     // View Numbers 1=View One, 2=View Two, 3=ScrollView
     func pick_view(_ viewSelection : Int) {
         
@@ -268,6 +327,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     //open bring pop-up from bottom
     func loadPopup(_ dir : Bool) {
 
@@ -300,6 +365,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
 
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func add_primary_tapResponse() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.myPrimaryTapResponse(_:)));
@@ -314,6 +385,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func add_popup_tapResponse() {
         
         let pop_tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.myPrimaryTapResponse2(_:)));
@@ -326,6 +403,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func addLabel(_ aView: UIView, dispStr : String, yCoord : CGFloat) {
         
         let anotherView : UIView = UIView(frame: CGRect(x: 20, y:yCoord, width: 120, height: 50));
@@ -349,6 +432,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func addSubviewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
         let newButton : UIButton = UIButton(type: UIButtonType.roundedRect);
@@ -372,6 +461,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func addScrollViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
         let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
@@ -393,8 +488,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         return;
     }
-
     
+
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     func addPopupViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
         let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
@@ -418,6 +519,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     //@brief    nudge the width of a text button's frame to fit the text
     func nudgeTextFrame(_ origFrame : CGRect, width_expand : CGFloat) -> CGRect {
 
@@ -428,7 +535,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return newFrame;
     }
 
-
+    
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func myPrimaryTapResponse(_ sender: UITapGestureRecognizer) {
         print("Bam here it is!!!!");
         //let tappedView = sender.view as UIView!;
@@ -436,6 +549,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func myPrimaryTapResponse2(_ sender: UITapGestureRecognizer) {
         print("Pop???");
         self.loadPopup(false);
@@ -443,6 +562,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func press_launch(_ sender: UIButton!) {
         
         print("\(sender.titleLabel!.text!) was pressed and press_launch called");
@@ -453,6 +578,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func press_scrollLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!");
         
@@ -462,6 +593,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func press_return(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_return called");
         
@@ -471,6 +608,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     @objc func press_popupLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_popupLaunch called!");
 
@@ -480,6 +623,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning(); }
+    /********************************************************************************************************************************/
+    /** @fcn        int main(void)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning();
+    }
 }
 
