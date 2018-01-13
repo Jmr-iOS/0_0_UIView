@@ -6,7 +6,7 @@
  *
  *  @author     Justin Reina, Firmware Engineer, Jaostech
  *  @created    11/6/16
- *  @last rev   1/2/18
+ *  @last rev   1/13/18
  *
  *
  *  @notes      x
@@ -58,11 +58,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad();
         
         //Init UI
-        self.genBasicViews();
-        self.genScrollView();
-        self.genUpperBorderedView();
-        self.genPopup();
-        self.add_primary_tapResponse();
+        genBasicViews();
+        genScrollView();
+        genUpperBorderedView();
+        genPopup();
+        add_primary_tapResponse();
 
         return;
     }
@@ -93,26 +93,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func genBasicViews() {
         
         //View One
-        self.viewOne = CustomView();
+        viewOne = CustomView();
         //(if needed) self.viewOne.backgroundColor = UIColor.redColor();
-        self.viewOne.frame = self.view.frame;
+        viewOne.frame = self.view.frame;
         
         //Misc. Buttons
-        self.addLabel(self.viewOne,     dispStr: "View 1", yCoord: 60);
-        self.addSubviewButton(self.viewOne,    return_msg: "Launch View #2",       action_fcn:  #selector(ViewController.press_launch(_:)));
-        self.addScrollViewButton(self.viewOne, return_msg: "Launch ScrollView",    action_fcn:  #selector(ViewController.press_scrollLaunch(_:)));
-        self.addPopupViewButton(self.viewOne,  return_msg: "Launch Popup Message", action_fcn:  #selector(ViewController.press_popupLaunch(_:)));
+        addLabel(self.viewOne,     dispStr: "View 1", yCoord: 60);
+        addSubviewButton(self.viewOne,    return_msg: "Launch View #2",       action_fcn:  #selector(ViewController.press_launch(_:)));
+        addScrollViewButton(self.viewOne, return_msg: "Launch ScrollView",    action_fcn:  #selector(ViewController.press_scrollLaunch(_:)));
+        addPopupViewButton(self.viewOne,  return_msg: "Launch Popup Message", action_fcn:  #selector(ViewController.press_popupLaunch(_:)));
         
         //View Two
-        self.viewTwo = UIView();
-        self.viewTwo.backgroundColor = UIColor.blue;
-        self.viewTwo.frame = self.view.frame;
+        viewTwo = UIView();
+        viewTwo.backgroundColor = UIColor.blue;
+        viewTwo.frame = self.view.frame;
         
-        self.addLabel(self.viewTwo, dispStr: "View 2", yCoord: 60);
-        self.addSubviewButton(self.viewTwo, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
+        addLabel(self.viewTwo, dispStr: "View 2", yCoord: 60);
+        addSubviewButton(self.viewTwo, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
 
-        self.viewOne.frame = self.view.frame;
-        self.viewTwo.frame = CGRect(x: self.view.frame.width,
+        viewOne.frame = self.view.frame;
+        viewTwo.frame = CGRect(x: self.view.frame.width,
                                         y: 0,
                                         width: self.view.frame.width,
                                         height: self.view.frame.height);            /* init off-screen                              */
@@ -134,28 +134,28 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let scrollViewHeight : CGFloat = 3 * self.view.frame.height;
         
-        self.scrollView = UIScrollView.init(frame: self.view.frame);
+        scrollView = UIScrollView.init(frame: self.view.frame);
         
-        self.scrollView.backgroundColor = UIColor.green;
+        scrollView.backgroundColor = UIColor.green;
         
-        self.scrollView.frame = CGRect(x: self.view.frame.width,
+        scrollView.frame = CGRect(x: self.view.frame.width,
                                            y: 0,
                                            width: self.view.frame.width,            /* init off-screen                              */
                                            height: scrollViewHeight);
         
-        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.scrollView.frame.height);
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height);
         
-        self.scrollView.isUserInteractionEnabled = true;
+        scrollView.isUserInteractionEnabled = true;
         
-        self.addLabel(self.scrollView, dispStr: "ScrollView", yCoord: 60);
+        addLabel(scrollView, dispStr: "ScrollView", yCoord: 60);
         
-        self.addSubviewButton(self.scrollView, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
+        addSubviewButton(scrollView, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
         
-        self.addLabel(self.scrollView, dispStr: "midText", yCoord: scrollViewHeight/2);
-        self.addLabel(self.scrollView, dispStr: "LowText", yCoord: scrollViewHeight-75);
+        addLabel(scrollView, dispStr: "midText", yCoord: scrollViewHeight/2);
+        addLabel(scrollView, dispStr: "LowText", yCoord: scrollViewHeight-75);
 
 
-        self.view.addSubview(self.scrollView);
+        self.view.addSubview(scrollView);
 
         return;
     }
@@ -170,8 +170,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func genPopup() {
         
         //Popup View (from bottom
-        self.popupView = UIView();
-        self.popupView.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 102/255, alpha: 1); //UIColor.blackColor();
+        popupView = UIView();
+        popupView.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 102/255, alpha: 1); //UIColor.blackColor();
 
         let someLabel : UILabel = UILabel(frame: CGRect(x:0,y:0,width:self.view.frame.width,height:popupHeight));
         someLabel.font  =   UIFont(name: "HelveticaNeue", size: 17);
@@ -179,9 +179,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         someLabel.textColor     = UIColor.white;
         someLabel.textAlignment = NSTextAlignment.center;
         
-        self.popupView.addSubview(someLabel);
+        popupView.addSubview(someLabel);
         
-        self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: popupHeight);
+        popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: popupHeight);
  
         return;
     }
@@ -196,14 +196,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func genUpperBorderedView() {
 
         //Generate the View
-        self.viewThree = CustomSubview();
+        viewThree = CustomSubview();
 
+        viewThree.setBorder(color: UIColor.white, size: 2);
+        
         //Add
-        self.view.addSubview(self.viewThree);
+        view.addSubview(self.viewThree);
 
         return;
     }
-    
+
     
     /********************************************************************************************************************************/
     /** @fcn        isViewInFront(_ viewSelection : Int) -> Bool
@@ -213,9 +215,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func isViewInFront(_ viewSelection : Int) -> Bool {
         
-        let viewOne_x    = self.viewOne.frame.origin.x;
-        let viewTwo_x    = self.viewTwo.frame.origin.x;
-        let scrollView_x = self.scrollView.frame.origin.x;
+        let viewOne_x    = viewOne.frame.origin.x;
+        let viewTwo_x    = viewTwo.frame.origin.x;
+        let scrollView_x = scrollView.frame.origin.x;
         
         switch(viewSelection) {
         case 1:
@@ -253,7 +255,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if(viewSelection == 2) {
             self.view.addSubview(viewTwo);
         } else if (viewSelection == 3) {
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false);           //reset view origin before load!
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false);           //reset view origin before load!
             self.view.addSubview(scrollView);
         }
         
@@ -379,7 +381,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.view.addGestureRecognizer(tapGesture);
         
-        self.add_popup_tapResponse();
+        add_popup_tapResponse();
         
         return;
     }
@@ -397,7 +399,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         pop_tapGesture.delegate = self;
         
-        self.popupView.addGestureRecognizer(pop_tapGesture);
+        popupView.addGestureRecognizer(pop_tapGesture);
         
         return;
     }
@@ -557,7 +559,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     @objc func myPrimaryTapResponse2(_ sender: UITapGestureRecognizer) {
         print("Pop???");
-        self.loadPopup(false);
+        loadPopup(false);
         return;
     }
     
@@ -572,7 +574,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         print("\(sender.titleLabel!.text!) was pressed and press_launch called");
         
-        self.pick_view(2);
+        pick_view(2);
         
         return;
     }
@@ -587,7 +589,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func press_scrollLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!");
         
-        self.pick_view(3);
+        pick_view(3);
         
         return;
     }
@@ -602,7 +604,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func press_return(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_return called");
         
-        self.pick_view(1);
+        pick_view(1);
         
         return;
     }
@@ -617,7 +619,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func press_popupLaunch(_ sender: UIButton!) {
         print("\(sender.titleLabel!.text!) was pressed and press_popupLaunch called!");
 
-        self.loadPopup(true);
+        loadPopup(true);
         
         return;
     }
