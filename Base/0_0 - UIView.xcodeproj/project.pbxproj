@@ -16,6 +16,9 @@
 		D04403D1200AC0B2008E142F /* UIKitExtens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04403D0200AC0B2008E142F /* UIKitExtens.swift */; };
 		D0B9B6D1200BCBEE0054384E /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B9B6CF200BCBEE0054384E /* Globals.swift */; };
 		D0B9B6D2200BCBEE0054384E /* DataBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B9B6D0200BCBEE0054384E /* DataBackup.swift */; };
+		D0B9B6D5200BCEC00054384E /* Empty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0B9B6D3200BCEC00054384E /* Empty.storyboard */; };
+		D0B9B6D6200BCEC00054384E /* NewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B9B6D4200BCEC00054384E /* NewClass.swift */; };
+		D0B9B6D8200BCEF30054384E /* UIView Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B9B6D7200BCEF30054384E /* UIView Examples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		D0B9B6CD200BBD4D0054384E /* 0_0 - UIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "0_0 - UIView.app"; path = "/Users/justin/Documents/MyWorkspaces/iOS/Programmatic UI/0_0 - UIView/Base/build/Debug-iphoneos/0_0 - UIView.app"; sourceTree = "<absolute>"; };
 		D0B9B6CF200BCBEE0054384E /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = ../Data/Globals.swift; sourceTree = "<group>"; };
 		D0B9B6D0200BCBEE0054384E /* DataBackup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBackup.swift; path = ../Data/DataBackup.swift; sourceTree = "<group>"; };
+		D0B9B6D3200BCEC00054384E /* Empty.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Empty.storyboard; path = ../../../../../Ref/iOS/Base/Empty.storyboard; sourceTree = "<group>"; };
+		D0B9B6D4200BCEC00054384E /* NewClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewClass.swift; path = ../../../../../Ref/iOS/Base/NewClass.swift; sourceTree = "<group>"; };
+		D0B9B6D7200BCEF30054384E /* UIView Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView Examples.swift"; path = "../UIView Examples.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,8 @@
 			children = (
 				D037CDBA1FFC08BF0007C90E /* Assets.xcassets */,
 				D037CDCB1FFC0E5A0007C90E /* Stdcomments.swift */,
+				D0B9B6D3200BCEC00054384E /* Empty.storyboard */,
+				D0B9B6D4200BCEC00054384E /* NewClass.swift */,
 				D037CDB61FFC08BF0007C90E /* Info.plist */,
 				D037CDC81FFC09870007C90E /* Product */,
 			);
@@ -77,10 +85,11 @@
 			isa = PBXGroup;
 			children = (
 				D037CDB51FFC08B60007C90E /* Base */,
-				D0B9B6CE200BCBD40054384E /* Data */,
 				D037CDC21FFC090D0007C90E /* Lib */,
-				D037CDBF1FFC08C70007C90E /* AppDelegate.swift */,
+				D0B9B6CE200BCBD40054384E /* Data */,
 				D037CDBE1FFC08C70007C90E /* ViewController.swift */,
+				D0B9B6D7200BCEF30054384E /* UIView Examples.swift */,
+				D037CDBF1FFC08C70007C90E /* AppDelegate.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +162,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B9B6D5200BCEC00054384E /* Empty.storyboard in Resources */,
 				D037CDBC1FFC08BF0007C90E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,10 +177,12 @@
 				D037CDCC1FFC0E5A0007C90E /* Stdcomments.swift in Sources */,
 				D037CDC51FFC092F0007C90E /* CustomView.swift in Sources */,
 				D037CDC11FFC08C80007C90E /* AppDelegate.swift in Sources */,
+				D0B9B6D6200BCEC00054384E /* NewClass.swift in Sources */,
 				D0B9B6D2200BCBEE0054384E /* DataBackup.swift in Sources */,
 				D037CDC61FFC092F0007C90E /* CustomSubview.swift in Sources */,
 				D037CDC01FFC08C80007C90E /* ViewController.swift in Sources */,
 				D0B9B6D1200BCBEE0054384E /* Globals.swift in Sources */,
+				D0B9B6D8200BCEF30054384E /* UIView Examples.swift in Sources */,
 				D04403D1200AC0B2008E142F /* UIKitExtens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

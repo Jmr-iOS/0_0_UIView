@@ -21,7 +21,6 @@
  *      http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
  *
  *  @section    Opens
- *      encapsulation into subroutines for all major examples. clean for copy 'n paste
  *      image to background example
  *      add rounded corners
  *
@@ -36,9 +35,9 @@ import UIKit
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //UI
-    var viewOne   : CustomView!;
-    var viewTwo   : ViewTwo!;
-    var viewThree : UIView!;
+    var viewOne    : CustomView!;
+    var viewTwo    : ViewTwo!;
+    var viewThree  : UIView!;
     var popupView  : UIView!;
     var scrollView : UIScrollView!;
     
@@ -60,7 +59,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         genScrollView();
         genUpperBorderedView();
         genPopup();
-        add_primary_tapResponse();
+        genTapResponse();
         
         if(verbose) { print("ViewController.viewDidLoad():       complete"); }
 
@@ -79,8 +78,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     override func viewDidAppear(_ animated: Bool) {
-        let value = UIInterfaceOrientation.portrait.rawValue;
-        UIDevice.current.setValue(value, forKey: "orientation");
+        setOrientation(orientation: .portrait);
         return;
     }
     
@@ -127,7 +125,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /********************************************************************************************************************************/
     /** @fcn        genScrollView()
-     *  @brief      x
+     *  @brief      generate a scroll view
      *  @details    x
      */
     /********************************************************************************************************************************/
@@ -155,7 +153,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         addLabel(scrollView, dispStr: "midText", yCoord: scrollViewHeight/2);
         addLabel(scrollView, dispStr: "LowText", yCoord: scrollViewHeight-75);
 
-
         self.view.addSubview(scrollView);
 
         return;
@@ -164,7 +161,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /********************************************************************************************************************************/
     /** @fcn        genPopup()
-     *  @brief      x
+     *  @brief      generate a popup
      *  @details    x
      */
     /********************************************************************************************************************************/
@@ -344,7 +341,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.viewTwo.fadingView.alpha = 1.0;
             if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in begin"); }
         }, completion: { (finished: Bool) -> Void in
-            
             if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complet"); }
             self.fadeOutViewTwoComponents();                            /* fade out on completion                                   */
         });
@@ -409,12 +405,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
     /********************************************************************************************************************************/
-    /** @fcn        add_primary_tapResponse()
+    /** @fcn        genTapResponse()
      *  @brief      x
      *  @details    x
      */
     /********************************************************************************************************************************/
-    func add_primary_tapResponse() {
+    func genTapResponse() {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.mainTapResp(_:)));
         
@@ -422,19 +418,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.view.addGestureRecognizer(tapGesture);
         
-        add_popup_tapResponse();
+        genPopupResp();
         
         return;
     }
     
     
     /********************************************************************************************************************************/
-    /** @fcn        add_popup_tapResponse()
+    /** @fcn        genPopupResp()
      *  @brief      x
      *  @details    x
      */
     /********************************************************************************************************************************/
-    func add_popup_tapResponse() {
+    func genPopupResp() {
         
         let pop_tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.popupResp(_:)));
         

@@ -12,7 +12,7 @@
 /************************************************************************************************************************************/
 import UIKit
 
-let verbose : Bool    = false;
+let verbose : Bool    = true;
 let globals : Globals = Globals();
 
 //->(put your variables here)
