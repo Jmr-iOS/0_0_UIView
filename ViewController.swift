@@ -6,7 +6,7 @@
  *
  *  @author     Justin Reina, Firmware Engineer, Jaostech
  *  @created    11/6/16
- *  @last rev   1/13/18
+ *  @last rev   1/14/18
  *
  *
  *  @notes      x
@@ -21,11 +21,13 @@
  *      http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
  *
  *  @section    Opens
- *      @objc drops
- *      add data
- *      add rounded corners
- *      print() formats consistent
+ *      @fcn        int main(void)
  *      misc cleanups (wow, non-standardized)
+ *      add data & globals
+ *      ...
+ *      encapsulation into subroutines for all major examples. clean for copy 'n paste
+ *      image to background example
+ *      add rounded corners
  *
  *     @section    Legal Disclaimer
  *             All contents of this source file and/or any other Jaostech related source files are the explicit property on Jaostech
@@ -34,6 +36,8 @@
 /************************************************************************************************************************************/
 import UIKit
 
+let verbose : Bool = true;
+
 //@brief     fade start on entry, not load!
 class ViewTwo : UIView {
     
@@ -41,11 +45,17 @@ class ViewTwo : UIView {
     
     var fadingView : UIView;
     
+    /********************************************************************************************************************************/
+    /** @fcn        override init(frame: CGRect)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
     override init(frame: CGRect) {
         
         fadingView = UIView(frame: CGRect(x: (UIScreen.main.bounds.width/2-75), y: 135, width: 150, height: 75));
         fadingView.backgroundColor = UIColor.darkGray;
-        fadingView.alpha = 0.0;                                 //init hidden
+        fadingView.alpha = 0.0;                                         /* init hidden                                              */
         
         super.init(frame:frame);
         
@@ -55,6 +65,11 @@ class ViewTwo : UIView {
         
     }
     
+    
+    /********************************************************************************************************************************/
+    /** @fcn        required init?(coder aDecoder: NSCoder)
+     *  @brief      x                                                                                                               */
+    /********************************************************************************************************************************/
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
 }
 
@@ -87,6 +102,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         genUpperBorderedView();
         genPopup();
         add_primary_tapResponse();
+        
+        if(verbose) { print("ViewController.viewDidLoad():       complete"); }
 
         return;
     }
@@ -105,6 +122,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         let value = UIInterfaceOrientation.portrait.rawValue;
         UIDevice.current.setValue(value, forKey: "orientation");
+        return;
     }
     
     
@@ -143,7 +161,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
         self.view.addSubview(viewOne);                                              /* add em both!                                 */
         self.view.addSubview(viewTwo);
-        
+
         return;
     }
     
@@ -239,6 +257,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func isViewInFront(_ viewSelection : Int) -> Bool {
         
+        var isInFront : Bool = false;                                   /* init to false, set true if found                         */
+        
         let viewOne_x    = viewOne.frame.origin.x;
         let viewTwo_x    = viewTwo.frame.origin.x;
         let scrollView_x = scrollView.frame.origin.x;
@@ -246,34 +266,35 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         switch(viewSelection) {
         case 1:
             if ((viewOne_x == 0)&&(viewTwo_x != 0)&&(scrollView_x != 0)) {
-                return true;
+                isInFront = true;
             }
             break;
         case 2:
             if ((viewTwo_x == 0)&&(scrollView_x != 0)) {
-                return true;
+                isInFront = true;
             }
             break;
         case 3:
             if (scrollView_x == 0) {
-                return true;
+                isInFront = true;
             }
             break;
         default:
             fatalError("invalid viewSelection presented in isViewInFront()");
         }
         
-        return false;
+        if(verbose) { print("ViewController.isViewInFront():     view \(viewSelection) in front: \(isInFront)"); }
+        
+        return isInFront;
     }
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        pick_view(_ viewSelection : Int)
      *  @brief      x
-     *  @details    x
+     *  @details    view numbers - 1=View One, 2=View Two, 3=ScrollView
      */
     /********************************************************************************************************************************/
-    // View Numbers 1=View One, 2=View Two, 3=ScrollView
     func pick_view(_ viewSelection : Int) {
         
         if(viewSelection == 2) {
@@ -347,6 +368,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
         });
         
+        if(verbose) { print("ViewController.pick_view():         view selection complete"); }
+        
         return;
     }
 
@@ -361,14 +384,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
         UIView.animate(withDuration: 1, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
             self.viewTwo.fadingView.alpha = 1.0;
-            print("fadeInViewTwoComponents():       fade in begin");
+            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in begin"); }
         }, completion: { (finished: Bool) -> Void in
-            print("fadeInViewTwoComponents():       fade in complete!");
+            
+            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complete!"); }
             self.fadeOutViewTwoComponents();                            /* fade out on completion                                   */
         });
         
+        
         return;
     }
+    
     
     /********************************************************************************************************************************/
     /** @fcn        fadeOutViewTwoComponents()
@@ -380,14 +406,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         UIView.animate(withDuration: 1, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
             self.viewTwo.fadingView.alpha = 0.0;
-            print("fadeOutViewTwoComponents():      fade out begin");
+        if(verbose) { print("ViewController.fadeOutVwTwoComp():  fade out begin"); }
         }, completion: { (finished: Bool) -> Void in
-            print("fadeOutViewTwoComponents():      fade out complete!");
+            if(verbose) { print("ViewController.fadeOutVwTwoComp():  fade out complete!"); }
         });
-
         
+        return;
     }
 
+    
     /********************************************************************************************************************************/
     /** @fcn        loadPopup(_ dir : Bool)
      *  @brief      x
@@ -400,24 +427,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.view.addSubview(self.popupView);
 
             UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-            
-                    print("sliding popup in!");
-                    self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height-self.popupHeight, width: self.view.frame.width, height: self.popupHeight);
+                if(verbose) { print("ViewController.loadPopup():         sliding popup in!"); }
+                self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height-self.popupHeight, width: self.view.frame.width, height: self.popupHeight);
             
                 }, completion: { (finished: Bool) -> Void in
-                        print("sliding popup in completion!");
-                        self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
+                    if(verbose) { print("ViewController.loadPopup():         sliding popup in completion!"); }
+                    self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
             });
         } else {
-            print("off!");
+            if(verbose) { print("ViewController.loadPopup():         off!"); }
             UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                
-                print("sliding popup out");
+                if(verbose) { print("ViewController.loadPopup():         sliding popup out"); }
                 self.viewOne.frame = UIScreen.main.bounds;
                 self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: self.popupHeight);
                 
                 }, completion: { (finished: Bool) -> Void in
-                    print("sliding popup out completion");
+                    if(verbose) { print("ViewController.loadPopup():         sliding popup out completion"); }
             });
         }
         
@@ -511,10 +536,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         newButton.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 250);    /* must call after it's sized or won't work!*/
         newButton.frame = nudgeTextFrame(newButton.frame, width_expand: 10);
         
-        //actions
+        //Actions
         newButton.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
-        //add!
+        //Add to view
         aView.addSubview(newButton);
         
         return;
@@ -529,22 +554,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func addScrollViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
-        let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
+        let newButton : UIButton = UIButton(type: UIButtonType.roundedRect);
         
-        newButton2.translatesAutoresizingMaskIntoConstraints = true;                     /* must be true for center to work          */
+        newButton.translatesAutoresizingMaskIntoConstraints = true;                 /* must be true for center to work              */
         
-        newButton2.setTitle(return_msg,      for: UIControlState());
-        newButton2.backgroundColor = UIColor.white;
+        newButton.setTitle(return_msg,      for: UIControlState());
+        newButton.backgroundColor = UIColor.white;
         
-        newButton2.sizeToFit();
-        newButton2.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 500);    /* must call after it's sized or won't work!*/
-        newButton2.frame = nudgeTextFrame(newButton2.frame, width_expand: 20);
+        newButton.sizeToFit();
+        newButton.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 500);      /* must call after it's sized or won't work!    */
+        newButton.frame = nudgeTextFrame(newButton.frame, width_expand: 20);
         
-        //actions
-        newButton2.addTarget(self, action: action_fcn, for:  .touchUpInside);
+        //Actions
+        newButton.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
-        //add!
-        aView.addSubview(newButton2);
+        //Add to view
+        aView.addSubview(newButton);
         
         return;
     }
@@ -558,22 +583,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func addPopupViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector) {
         
-        let newButton2 : UIButton = UIButton(type: UIButtonType.roundedRect);
+        let newButton : UIButton = UIButton(type: UIButtonType.roundedRect);
         
-        newButton2.translatesAutoresizingMaskIntoConstraints = true;                     /* must be true for center to work          */
+        newButton.translatesAutoresizingMaskIntoConstraints = true;                 /* must be true for center to work             */
         
-        newButton2.setTitle(return_msg,      for: UIControlState());
-        newButton2.backgroundColor = UIColor.white;
+        newButton.setTitle(return_msg,      for: UIControlState());
+        newButton.backgroundColor = UIColor.white;
         
-        newButton2.sizeToFit();
-        newButton2.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 600);    /* must call after it's sized or won't work!*/
-        newButton2.frame = nudgeTextFrame(newButton2.frame, width_expand: 20);
+        newButton.sizeToFit();
+        newButton.center = CGPoint(x: (UIScreen.main.bounds.width)/2, y: 600);     /* must call after it's sized or won't work!    */
+        newButton.frame = nudgeTextFrame(newButton.frame, width_expand: 20);
         
-        //actions
-        newButton2.addTarget(self, action: action_fcn, for:  .touchUpInside);
+        //Actions
+        newButton.addTarget(self, action: action_fcn, for:  .touchUpInside);
         
-        //add!
-        aView.addSubview(newButton2);
+        //Add to view
+        aView.addSubview(newButton);
         
         return;
     }
@@ -590,19 +615,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let size : CGFloat = origFrame.width + width_expand;
         
         let newFrame : CGRect = CGRect(x: origFrame.origin.x - (width_expand/2), y: origFrame.origin.y, width: size, height: origFrame.height);
-
+        
         return newFrame;
     }
 
     
     /********************************************************************************************************************************/
-    /** @fcn        func myPrimaryTapResponse(_ sender: UITapGestureRecognizer)
+    /** @fcn        myPrimaryTapResponse(_ sender: UITapGestureRecognizer)
      *  @brief      x
      *  @details    x
      */
     /********************************************************************************************************************************/
     @objc func myPrimaryTapResponse(_ sender: UITapGestureRecognizer) {
-        print("Bam here it is!!!!");
+        if(verbose) { print("ViewController.myPrimTapResp():     bam here it is!!"); }
         //let tappedView = sender.view as UIView!;
         return;
     }
@@ -615,8 +640,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     @objc func myPrimaryTapResponse2(_ sender: UITapGestureRecognizer) {
-        print("Pop???");
+    
+        if(verbose) { print("ViewController.myPrimTapResp2():    pop??"); }
+        
         loadPopup(false);
+        
         return;
     }
     
@@ -628,8 +656,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     @objc func press_launch(_ sender: UIButton!) {
-        
-        print("\(sender.titleLabel!.text!) was pressed and press_launch called");
+
+        if(verbose) { print("ViewController.press_launch():      \(sender.titleLabel!.text!) was pressed and press_launch called"); }
         
         pick_view(2);
         
@@ -644,7 +672,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     @objc func press_scrollLaunch(_ sender: UIButton!) {
-        print("\(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!");
+
+        if(verbose) { print("ViewController.press_scrollLnch():  \(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!"); }
         
         pick_view(3);
         
@@ -659,7 +688,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     @objc func press_return(_ sender: UIButton!) {
-        print("\(sender.titleLabel!.text!) was pressed and press_return called");
+        
+        if(verbose) { print("ViewController.press_return():      \(sender.titleLabel!.text!) was pressed and press_return called"); }
         
         pick_view(1);
         
@@ -674,10 +704,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      */
     /********************************************************************************************************************************/
     @objc func press_popupLaunch(_ sender: UIButton!) {
-        print("\(sender.titleLabel!.text!) was pressed and press_popupLaunch called!");
-
-        loadPopup(true);
         
+        if(verbose) { print("ViewController.press_popupLaunch(): \(sender.titleLabel!.text!) was pressed and press_popupLaunch called!"); }
+        
+        loadPopup(true);
+
         return;
     }
     
