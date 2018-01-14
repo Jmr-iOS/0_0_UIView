@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = viewController;
         
         self.window?.makeKeyAndVisible();
-        
+
         if(verbose) { print("AppDelegate.application():          application launch complete"); }
         
         return true;

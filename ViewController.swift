@@ -21,8 +21,6 @@
  *      http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
  *
  *  @section    Opens
- *      add data & globals
- *      ...
  *      encapsulation into subroutines for all major examples. clean for copy 'n paste
  *      image to background example
  *      add rounded corners
@@ -33,8 +31,6 @@
  */
 /************************************************************************************************************************************/
 import UIKit
-
-let verbose : Bool = true;
 
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
