@@ -9,8 +9,10 @@
  *      custom view class   CustomView.init()
  *      scroll view         ViewController.genScrollView()
  *      popup view          ViewController.genPopup()
- *      borders             UIKitExtens.setBorder()
+ *      image bkgd          UIKitExtens.setImageBackground()
  *      fade                ViewController.fadeOutViewTwoComponents()
+ *      borders             UIKitExtens.setBorder()
+ *      rounded view        UIKitExtens.roundCorners()
  *
  *  @section    Opens
  *      none listed
@@ -56,3 +58,26 @@ func setOrientation(orientation : UIInterfaceOrientation) {
     return;
 }
 
+
+/********************************************************************************************************************************/
+/** @fcn        setImageBackground(view : UIView)
+ *  @brief      set an image as the background to a UIView
+ *  @details    x
+ */
+/********************************************************************************************************************************/
+func setImageBackground(view : UIView) {
+    view.backgroundColor = UIColor(patternImage: UIImage(named: "bkgnd_image")!);
+    return;
+}
+
+
+/********************************************************************************************************************************/
+/** @fcn        roundCorners(view : UIView)
+ *  @brief      round the corners of a view
+ *  @details    x
+ */
+/********************************************************************************************************************************/
+func roundCorners(_ view : UIView,_ radius : CGFloat) {
+    view.layer.cornerRadius = radius;
+    return;
+}

@@ -87,8 +87,8 @@
 				D037CDB51FFC08B60007C90E /* Base */,
 				D037CDC21FFC090D0007C90E /* Lib */,
 				D0B9B6CE200BCBD40054384E /* Data */,
-				D037CDBE1FFC08C70007C90E /* ViewController.swift */,
 				D0B9B6D7200BCEF30054384E /* UIView Examples.swift */,
+				D037CDBE1FFC08C70007C90E /* ViewController.swift */,
 				D037CDBF1FFC08C70007C90E /* AppDelegate.swift */,
 			);
 			sourceTree = "<group>";

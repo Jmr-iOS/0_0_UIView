@@ -20,9 +20,17 @@
  *      http://stackoverflow.com/questions/24030348/how-to-create-a-button-programmatically
  *      http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
  *
+ *  @section    Screen Dimensions
+ *      @ref    http://www.kylejlarson.com/blog/iphone-6-screen-size-web-design-tips/
+ *      @ref    https://think360studio.com/what-dimensions-resolution-should-be-for-ios-and-android-app-design/
+ *      iPhone 4      - 320x480 px
+ *      iPhone 5      - 320x568 px
+ *      iPhone 6/7/8  - 375x667 px
+ *      iPhone 6/7/8+ - 414x736 px
+ *      iPhone X      - 375x812 px
+ *
  *  @section    Opens
- *      image to background example
- *      add rounded corners
+ *      none listed
  *
  *     @section    Legal Disclaimer
  *             All contents of this source file and/or any other Jaostech related source files are the explicit property on Jaostech
@@ -104,7 +112,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         //View Two
         viewTwo = ViewTwo();
-        viewTwo.backgroundColor = UIColor.blue;
+        setImageBackground(view: viewTwo);
         viewTwo.frame = self.view.frame;
         
         addLabel(viewTwo, dispStr: "View 2", yCoord: 60);
@@ -341,7 +349,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.viewTwo.fadingView.alpha = 1.0;
             if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in begin"); }
         }, completion: { (finished: Bool) -> Void in
-            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complet"); }
+            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complete"); }
             self.fadeOutViewTwoComponents();                            /* fade out on completion                                   */
         });
         
@@ -453,8 +461,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let anotherView : UIView = UIView(frame: CGRect(x: 20, y:yCoord, width: 120, height: 50));
         
         anotherView.backgroundColor = UIColor.gray;
-        
-        anotherView.layer.cornerRadius = 15;
+        roundCorners(anotherView, 15);
         
         let someLabel : UILabel = UILabel(frame: CGRect(x:5, y: 0, width: anotherView.frame.width, height:  anotherView.frame.height));
         
@@ -698,12 +705,15 @@ class ViewTwo : UIView {
     /********************************************************************************************************************************/
     override init(frame: CGRect) {
         
+        //Init UI
         fadingView = UIView(frame: CGRect(x: (UIScreen.main.bounds.width/2-75), y: 135, width: 150, height: 75));
         fadingView.backgroundColor = UIColor.darkGray;
         fadingView.alpha = 0.0;                                         /* init hidden                                              */
-        
+
+        //Super
         super.init(frame:frame);
         
+        //Add components
         addSubview(fadingView);
         
         return;
