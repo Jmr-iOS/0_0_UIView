@@ -21,8 +21,6 @@
  *      http://stackoverflow.com/questions/24102191/make-a-uibutton-programatically-in-swift
  *
  *  @section    Opens
- *      @fcn        int main(void)
- *      misc cleanups (wow, non-standardized)
  *      add data & globals
  *      ...
  *      encapsulation into subroutines for all major examples. clean for copy 'n paste
@@ -37,41 +35,6 @@
 import UIKit
 
 let verbose : Bool = true;
-
-//@brief     fade start on entry, not load!
-class ViewTwo : UIView {
-    
-    let fadeDur_sec = 1;
-    
-    var fadingView : UIView;
-    
-    /********************************************************************************************************************************/
-    /** @fcn        override init(frame: CGRect)
-     *  @brief      x
-     *  @details    x
-     */
-    /********************************************************************************************************************************/
-    override init(frame: CGRect) {
-        
-        fadingView = UIView(frame: CGRect(x: (UIScreen.main.bounds.width/2-75), y: 135, width: 150, height: 75));
-        fadingView.backgroundColor = UIColor.darkGray;
-        fadingView.alpha = 0.0;                                         /* init hidden                                              */
-        
-        super.init(frame:frame);
-        
-        addSubview(fadingView);
-        
-        return;
-        
-    }
-    
-    
-    /********************************************************************************************************************************/
-    /** @fcn        required init?(coder aDecoder: NSCoder)
-     *  @brief      x                                                                                                               */
-    /********************************************************************************************************************************/
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
-}
 
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -304,7 +267,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.view.addSubview(scrollView);
         }
         
-        print("old view off!");
+        if(verbose) { print("ViewController.pick_view():         old view off"); }
         
         let animDur_s : Double = 0.5;
         let animDel_s : Double = 0.5;
@@ -315,22 +278,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             var newScrollViewInFront : Bool = (self.scrollView.frame.origin.x == 0);
             
             if(viewSelection == 2) {                                /* Slide View 2 into view                                       */
-                print("sliding view 2 in!");
+                if(verbose) { print("ViewController.pick_view():         sliding view 2 in"); }
                 self.viewTwo.alpha = 1.0;
                 self.viewTwo.frame = self.view.frame;
                 newView2InFront = true;
                 newScrollViewInFront = false;
                 
             } else if (viewSelection == 3) {                        /* Slide ScrollView into view                                   */
-                print("sliding scrollview in!");
+                if(verbose) { print("ViewController.pick_view():         sliding scrollview in"); }
                 self.scrollView.alpha = 1.0;
                 self.scrollView.frame = self.view.frame;
                 newScrollViewInFront = true;
                 newView2InFront = false;
                 
             } else {                                                /* Slide View 2 out of view                                     */
-                
-                print("sliding old view(s) out!");
+                if(verbose) { print("ViewController.pick_view():         sliding old view(s) out"); }
                 
                 //if view 2 in front
                 if(newView2InFront == true) {
@@ -359,12 +321,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }, completion: { (finished: Bool) -> Void in
                 
                 if(viewSelection == 2) {                                    /* Slide View 2 into view                               */
-                    print("sliding view 2 in completion!");
+                    if(verbose) { print("ViewController.pick_view():         sliding view 2 in completion"); }
                     self.fadeInViewTwoComponents();
                     self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
                     
                 } else {                                                    /* Slide View 2 out of view                             */
-                    print("sliding view 2 out completion!");
+                    if(verbose) { print("ViewController.pick_view():         sliding view 2 out completion"); }
                 }
         });
         
@@ -387,7 +349,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in begin"); }
         }, completion: { (finished: Bool) -> Void in
             
-            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complete!"); }
+            if(verbose) { print("ViewController.fadeInVwTwoComp():   fade in complet"); }
             self.fadeOutViewTwoComponents();                            /* fade out on completion                                   */
         });
         
@@ -408,7 +370,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.viewTwo.fadingView.alpha = 0.0;
         if(verbose) { print("ViewController.fadeOutVwTwoComp():  fade out begin"); }
         }, completion: { (finished: Bool) -> Void in
-            if(verbose) { print("ViewController.fadeOutVwTwoComp():  fade out complete!"); }
+            if(verbose) { print("ViewController.fadeOutVwTwoComp():  fade out complete"); }
         });
         
         return;
@@ -427,15 +389,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.view.addSubview(self.popupView);
 
             UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                if(verbose) { print("ViewController.loadPopup():         sliding popup in!"); }
+                if(verbose) { print("ViewController.loadPopup():         sliding popup in"); }
                 self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height-self.popupHeight, width: self.view.frame.width, height: self.popupHeight);
             
                 }, completion: { (finished: Bool) -> Void in
-                    if(verbose) { print("ViewController.loadPopup():         sliding popup in completion!"); }
+                    if(verbose) { print("ViewController.loadPopup():         sliding popup in completion"); }
                     self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
             });
         } else {
-            if(verbose) { print("ViewController.loadPopup():         off!"); }
+            if(verbose) { print("ViewController.loadPopup():         off"); }
             UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                 if(verbose) { print("ViewController.loadPopup():         sliding popup out"); }
                 self.viewOne.frame = UIScreen.main.bounds;
@@ -458,7 +420,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func add_primary_tapResponse() {
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.myPrimaryTapResponse(_:)));
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.mainTapResp(_:)));
         
         tapGesture.delegate = self;
         
@@ -478,7 +440,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     func add_popup_tapResponse() {
         
-        let pop_tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.myPrimaryTapResponse2(_:)));
+        let pop_tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.popupResp(_:)));
         
         pop_tapGesture.delegate = self;
         
@@ -621,13 +583,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     /********************************************************************************************************************************/
-    /** @fcn        myPrimaryTapResponse(_ sender: UITapGestureRecognizer)
+    /** @fcn        mainTapResp(_ sender: UITapGestureRecognizer)
      *  @brief      x
      *  @details    x
      */
     /********************************************************************************************************************************/
-    @objc func myPrimaryTapResponse(_ sender: UITapGestureRecognizer) {
-        if(verbose) { print("ViewController.myPrimTapResp():     bam here it is!!"); }
+    @objc func mainTapResp(_ sender: UITapGestureRecognizer) {
+        if(verbose) { print("ViewController.mainTapResp():       primary view was tapped"); }
         //let tappedView = sender.view as UIView!;
         return;
     }
@@ -639,9 +601,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      *  @details    x
      */
     /********************************************************************************************************************************/
-    @objc func myPrimaryTapResponse2(_ sender: UITapGestureRecognizer) {
-    
-        if(verbose) { print("ViewController.myPrimTapResp2():    pop??"); }
+    @objc func popupResp(_ sender: UITapGestureRecognizer) {
+        if(verbose) { print("ViewController.popupResp():         popupview selected, dismissing"); }
         
         loadPopup(false);
         
@@ -673,7 +634,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     @objc func press_scrollLaunch(_ sender: UIButton!) {
 
-        if(verbose) { print("ViewController.press_scrollLnch():  \(sender.titleLabel!.text!) was pressed and press_scrollLaunch called!"); }
+        if(verbose) { print("ViewController.press_scrollLnch():  Scroll launch was pressed and view launched"); }
         
         pick_view(3);
         
@@ -705,7 +666,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /********************************************************************************************************************************/
     @objc func press_popupLaunch(_ sender: UIButton!) {
         
-        if(verbose) { print("ViewController.press_popupLaunch(): \(sender.titleLabel!.text!) was pressed and press_popupLaunch called!"); }
+        if(verbose) { print("ViewController.press_popupLaunch(): popup launch was pressed"); }
         
         loadPopup(true);
 
@@ -722,5 +683,46 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning();
     }
+}
+
+
+//**********************************************************************************************************************************//
+/**@class   ViewTwo
+ * @brief   showing fade start on entry, not load!                                                                                */
+//**********************************************************************************************************************************//
+class ViewTwo : UIView {
+    
+    //UI
+    var fadingView : UIView;
+    
+    //Const
+    let fadeDur_sec = 1;
+    
+    /********************************************************************************************************************************/
+    /** @fcn        override init(frame: CGRect)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
+    override init(frame: CGRect) {
+        
+        fadingView = UIView(frame: CGRect(x: (UIScreen.main.bounds.width/2-75), y: 135, width: 150, height: 75));
+        fadingView.backgroundColor = UIColor.darkGray;
+        fadingView.alpha = 0.0;                                         /* init hidden                                              */
+        
+        super.init(frame:frame);
+        
+        addSubview(fadingView);
+        
+        return;
+        
+    }
+    
+    
+    /********************************************************************************************************************************/
+    /** @fcn        required init?(coder aDecoder: NSCoder)
+     *  @brief      x                                                                                                               */
+    /********************************************************************************************************************************/
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
 }
 
