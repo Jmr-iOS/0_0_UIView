@@ -25,7 +25,7 @@
 		D037CDC41FFC092F0007C90E /* CustomSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSubview.swift; path = "../../../../../Ref/Libraries/Programmatic UI/CustomSubview.swift"; sourceTree = "<group>"; };
 		D037CDC71FFC097D0007C90E /* 0_0 - UIView.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "0_0 - UIView.app"; sourceTree = "<group>"; };
 		D037CDCB1FFC0E5A0007C90E /* Stdcomments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stdcomments.swift; path = ../../../../../Ref/iOS/Base/Stdcomments.swift; sourceTree = "<group>"; };
-		D04403CF200AC09F008E142F /* 0_0 - UIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "0_0 - UIView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D04403CF200AC09F008E142F /* 0_0 - UIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "0_0 - UIView.app"; path = "/Users/justin/Documents/MyWorkspaces/iOS/Programmatic UI/0_0 - UIView/Base/build/Debug-iphoneos/0_0 - UIView.app"; sourceTree = "<absolute>"; };
 		D04403D0200AC0B2008E142F /* UIKitExtens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtens.swift; path = "../../../../../Ref/Libraries/Programmatic UI/UIKitExtens.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,10 +43,10 @@
 		D037CDB51FFC08B60007C90E /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				D037CDC81FFC09870007C90E /* Product */,
 				D037CDBA1FFC08BF0007C90E /* Assets.xcassets */,
 				D037CDCB1FFC0E5A0007C90E /* Stdcomments.swift */,
 				D037CDB61FFC08BF0007C90E /* Info.plist */,
+				D037CDC81FFC09870007C90E /* Product */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -76,7 +76,6 @@
 				D037CDC21FFC090D0007C90E /* Lib */,
 				D037CDBF1FFC08C70007C90E /* AppDelegate.swift */,
 				D037CDBE1FFC08C70007C90E /* ViewController.swift */,
-				D04403CF200AC09F008E142F /* 0_0 - UIView.app */,
 			);
 			sourceTree = "<group>";
 		};

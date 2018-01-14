@@ -34,12 +34,36 @@
 /************************************************************************************************************************************/
 import UIKit
 
+//@brief     fade start on entry, not load!
+class ViewTwo : UIView {
+    
+    let fadeDur_sec = 1;
+    
+    var fadingView : UIView;
+    
+    override init(frame: CGRect) {
+        
+        fadingView = UIView(frame: CGRect(x: (UIScreen.main.bounds.width/2-75), y: 135, width: 150, height: 75));
+        fadingView.backgroundColor = UIColor.darkGray;
+        fadingView.alpha = 0.0;                                 //init hidden
+        
+        super.init(frame:frame);
+        
+        addSubview(fadingView);
+        
+        return;
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
+}
+
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //UI
     var viewOne   : CustomView!;
-    var viewTwo   : UIView!;
+    var viewTwo   : ViewTwo!;
     var viewThree : UIView!;
     var popupView  : UIView!;
     var scrollView : UIScrollView!;
@@ -104,12 +128,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         addPopupViewButton(self.viewOne,  return_msg: "Launch Popup Message", action_fcn:  #selector(ViewController.press_popupLaunch(_:)));
         
         //View Two
-        viewTwo = UIView();
+        viewTwo = ViewTwo();
         viewTwo.backgroundColor = UIColor.blue;
         viewTwo.frame = self.view.frame;
         
-        addLabel(self.viewTwo, dispStr: "View 2", yCoord: 60);
-        addSubviewButton(self.viewTwo, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
+        addLabel(viewTwo, dispStr: "View 2", yCoord: 60);
+        addSubviewButton(viewTwo, return_msg: "Return to View #1", action_fcn:  #selector(ViewController.press_return(_:)));
 
         viewOne.frame = self.view.frame;
         viewTwo.frame = CGRect(x: self.view.frame.width,
@@ -117,8 +141,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                                         width: self.view.frame.width,
                                         height: self.view.frame.height);            /* init off-screen                              */
 
-        self.view.addSubview(self.viewOne);                                         /* add em both!                                 */
-        self.view.addSubview(self.viewTwo);
+        self.view.addSubview(viewOne);                                              /* add em both!                                 */
+        self.view.addSubview(viewTwo);
         
         return;
     }
@@ -294,7 +318,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.viewTwo.frame = CGRect(x: self.view.frame.width,
                         y: 0,
                         width: self.view.frame.width,
-                        height: self.view.frame.height);                    /* init off-screen                                              */
+                        height: self.view.frame.height);                    /* init off-screen                                      */
                 }
                 
                 //if scrollview in front
@@ -304,7 +328,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.scrollView.frame = CGRect(x: self.view.frame.width,
                         y: 0,
                         width: self.view.frame.width,
-                        height: self.view.frame.height);                    /* init off-screen                                              */
+                        height: self.view.frame.height);                    /* init off-screen                                      */
                 }
                 
                 newScrollViewInFront = false;
@@ -313,15 +337,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             }, completion: { (finished: Bool) -> Void in
                 
-                if(viewSelection == 2) {        /* Slide View 2 into view                                                           */
+                if(viewSelection == 2) {                                    /* Slide View 2 into view                               */
                     print("sliding view 2 in completion!");
-                    
+                    self.fadeInViewTwoComponents();
                     self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
                     
-                } else {                        /* Slide View 2 out of view                                                         */
+                } else {                                                    /* Slide View 2 out of view                             */
                     print("sliding view 2 out completion!");
-                    
-                    self.viewTwo.frame = CGRect(x: self.view.frame.width, y: 0, width: self.view.frame.width, height: self.view.frame.height); //TEMP
                 }
         });
         
@@ -330,12 +352,48 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        fadeInViewTwoComponents()
+     *  @brief      fade in selected components to viewTwo
+     *  @details    used to illustrate multi-step fades
+     */
+    /********************************************************************************************************************************/
+    func fadeInViewTwoComponents() {
+
+        UIView.animate(withDuration: 1, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
+            self.viewTwo.fadingView.alpha = 1.0;
+            print("fadeInViewTwoComponents():       fade in begin");
+        }, completion: { (finished: Bool) -> Void in
+            print("fadeInViewTwoComponents():       fade in complete!");
+            self.fadeOutViewTwoComponents();                            /* fade out on completion                                   */
+        });
+        
+        return;
+    }
+    
+    /********************************************************************************************************************************/
+    /** @fcn        fadeOutViewTwoComponents()
+     *  @brief      fade out selected components from viewTwo
+     *  @details    called from fadeInViewTwoComponents on completion
+     */
+    /********************************************************************************************************************************/
+    func fadeOutViewTwoComponents() {
+        
+        UIView.animate(withDuration: 1, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
+            self.viewTwo.fadingView.alpha = 0.0;
+            print("fadeOutViewTwoComponents():      fade out begin");
+        }, completion: { (finished: Bool) -> Void in
+            print("fadeOutViewTwoComponents():      fade out complete!");
+        });
+
+        
+    }
+
+    /********************************************************************************************************************************/
+    /** @fcn        loadPopup(_ dir : Bool)
      *  @brief      x
      *  @details    x
      */
     /********************************************************************************************************************************/
-    //open bring pop-up from bottom
     func loadPopup(_ dir : Bool) {
 
         if(dir == true) {
@@ -368,7 +426,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        add_primary_tapResponse()
      *  @brief      x
      *  @details    x
      */
@@ -388,7 +446,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        add_popup_tapResponse()
      *  @brief      x
      *  @details    x
      */
@@ -406,7 +464,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        addLabel(_ aView: UIView, dispStr : String, yCoord : CGFloat)
      *  @brief      x
      *  @details    x
      */
@@ -435,7 +493,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        addSubviewButton(_ aView: UIView, return_msg: String, action_fcn : Selector)
      *  @brief      x
      *  @details    x
      */
@@ -464,7 +522,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        addScrollViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector)
      *  @brief      x
      *  @details    x
      */
@@ -493,7 +551,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
 
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        addPopupViewButton(_ aView: UIView, return_msg: String, action_fcn : Selector)
      *  @brief      x
      *  @details    x
      */
@@ -522,12 +580,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
-     *  @brief      x
+    /** @fcn        nudgeTextFrame(_ origFrame : CGRect, width_expand : CGFloat) -> CGRect
+     *  @brief      nudge the width of a text button's frame to fit the text
      *  @details    x
      */
     /********************************************************************************************************************************/
-    //@brief    nudge the width of a text button's frame to fit the text
     func nudgeTextFrame(_ origFrame : CGRect, width_expand : CGFloat) -> CGRect {
 
         let size : CGFloat = origFrame.width + width_expand;
@@ -539,7 +596,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        func myPrimaryTapResponse(_ sender: UITapGestureRecognizer)
      *  @brief      x
      *  @details    x
      */
@@ -552,7 +609,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        myPrimaryTapResponse2(_ sender: UITapGestureRecognizer)
      *  @brief      x
      *  @details    x
      */
@@ -565,7 +622,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        press_launch(_ sender: UIButton!)
      *  @brief      x
      *  @details    x
      */
@@ -581,7 +638,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        press_scrollLaunch(_ sender: UIButton!)
      *  @brief      x
      *  @details    x
      */
@@ -596,7 +653,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        press_return(_ sender: UIButton!)
      *  @brief      x
      *  @details    x
      */
@@ -611,7 +668,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        press_popupLaunch(_ sender: UIButton!)
      *  @brief      x
      *  @details    x
      */
@@ -626,7 +683,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     /********************************************************************************************************************************/
-    /** @fcn        int main(void)
+    /** @fcn        didReceiveMemoryWarning()
      *  @brief      x
      *  @details    x
      */
