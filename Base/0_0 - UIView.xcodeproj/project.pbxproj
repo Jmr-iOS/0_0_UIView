@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0274A0D201B84C900D0CF0F /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0274A0C201B84C900D0CF0F /* ViewUtils.swift */; };
 		D037CDBC1FFC08BF0007C90E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D037CDBA1FFC08BF0007C90E /* Assets.xcassets */; };
 		D037CDC01FFC08C80007C90E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037CDBE1FFC08C70007C90E /* ViewController.swift */; };
 		D037CDC11FFC08C80007C90E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037CDBF1FFC08C70007C90E /* AppDelegate.swift */; };
@@ -22,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D00A42C5201B955A00968E49 /* 0_0 - UIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "0_0 - UIView.app"; path = "/Users/justin/Documents/MyWorkspaces/iOS/Programmatic UI/0_0 - UIView/Base/build/Debug-iphoneos/0_0 - UIView.app"; sourceTree = "<absolute>"; };
+		D00A42C6201B956400968E49 /* 0_0 - UIView.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "0_0 - UIView.app"; sourceTree = "<group>"; };
+		D0274A0C201B84C900D0CF0F /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewUtils.swift; path = "../../../../../Ref/Libraries/Programmatic UI/ViewUtils.swift"; sourceTree = "<group>"; };
 		D037CDB61FFC08BF0007C90E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D037CDBA1FFC08BF0007C90E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D037CDBE1FFC08C70007C90E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
@@ -31,7 +35,6 @@
 		D037CDC71FFC097D0007C90E /* 0_0 - UIView.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "0_0 - UIView.app"; sourceTree = "<group>"; };
 		D037CDCB1FFC0E5A0007C90E /* Stdcomments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stdcomments.swift; path = ../../../../../Ref/iOS/Base/Stdcomments.swift; sourceTree = "<group>"; };
 		D04403D0200AC0B2008E142F /* UIKitExtens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtens.swift; path = "../../../../../Ref/Libraries/Programmatic UI/UIKitExtens.swift"; sourceTree = "<group>"; };
-		D0B9B6CD200BBD4D0054384E /* 0_0 - UIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "0_0 - UIView.app"; path = "/Users/justin/Documents/MyWorkspaces/iOS/Programmatic UI/0_0 - UIView/Base/build/Debug-iphoneos/0_0 - UIView.app"; sourceTree = "<absolute>"; };
 		D0B9B6CF200BCBEE0054384E /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = ../Data/Globals.swift; sourceTree = "<group>"; };
 		D0B9B6D0200BCBEE0054384E /* DataBackup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBackup.swift; path = ../Data/DataBackup.swift; sourceTree = "<group>"; };
 		D0B9B6D3200BCEC00054384E /* Empty.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Empty.storyboard; path = ../../../../../Ref/iOS/Base/Empty.storyboard; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		D037CDB51FFC08B60007C90E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				D00A42C6201B956400968E49 /* 0_0 - UIView.app */,
 				D037CDBA1FFC08BF0007C90E /* Assets.xcassets */,
 				D037CDCB1FFC0E5A0007C90E /* Stdcomments.swift */,
 				D0B9B6D3200BCEC00054384E /* Empty.storyboard */,
@@ -66,6 +70,7 @@
 		D037CDC21FFC090D0007C90E /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				D0274A0C201B84C900D0CF0F /* ViewUtils.swift */,
 				D04403D0200AC0B2008E142F /* UIKitExtens.swift */,
 				D037CDC41FFC092F0007C90E /* CustomSubview.swift */,
 				D037CDC31FFC092F0007C90E /* CustomView.swift */,
@@ -119,7 +124,7 @@
 			);
 			name = "0_0 - UIView";
 			productName = "0_0 - UIView";
-			productReference = D0B9B6CD200BBD4D0054384E /* 0_0 - UIView.app */;
+			productReference = D00A42C5201B955A00968E49 /* 0_0 - UIView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,6 +181,7 @@
 			files = (
 				D037CDCC1FFC0E5A0007C90E /* Stdcomments.swift in Sources */,
 				D037CDC51FFC092F0007C90E /* CustomView.swift in Sources */,
+				D0274A0D201B84C900D0CF0F /* ViewUtils.swift in Sources */,
 				D037CDC11FFC08C80007C90E /* AppDelegate.swift in Sources */,
 				D0B9B6D6200BCEC00054384E /* NewClass.swift in Sources */,
 				D0B9B6D2200BCBEE0054384E /* DataBackup.swift in Sources */,

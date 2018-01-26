@@ -6,7 +6,7 @@
  *
  *  @author     Justin Reina, Firmware Engineer, Jaostech
  *  @created    11/6/16
- *  @last rev   1/14/18
+ *  @last rev   1/26/18
  *
  *
  *  @notes      x
@@ -52,6 +52,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //Constants
     let popupHeight : CGFloat = 35;
     
+
+    /********************************************************************************************************************************/
+    /** @fcn        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+     *  @brief      x
+     *  @details    x
+     */
+    /********************************************************************************************************************************/
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+
+        //Super
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        //Config store
+        ViewUtils.storeView(self.view);                                     /* store main view for popup launching                  */
+
+        
+        if(verbose) { print("ViewController.init():              initialization complete"); }
+        
+        return;
+    }
     
     /********************************************************************************************************************************/
     /** @fcn        override func viewDidLoad()
@@ -66,7 +86,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         genBasicViews();
         genScrollView();
         genUpperBorderedView();
-        genPopup();
         genTapResponse();
         
         if(verbose) { print("ViewController.viewDidLoad():       complete"); }
@@ -129,8 +148,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
         return;
     }
-    
-    
+
+
     /********************************************************************************************************************************/
     /** @fcn        genScrollView()
      *  @brief      generate a scroll view
@@ -165,33 +184,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
         return;
     }
-    
-    
-    /********************************************************************************************************************************/
-    /** @fcn        genPopup()
-     *  @brief      generate a popup
-     *  @details    x
-     */
-    /********************************************************************************************************************************/
-    func genPopup() {
-        
-        //Popup View (from bottom
-        popupView = UIView();
-        popupView.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 102/255, alpha: 1); //UIColor.blackColor();
 
-        let someLabel : UILabel = UILabel(frame: CGRect(x:0,y:0,width:self.view.frame.width,height:popupHeight));
-        someLabel.font  =   UIFont(name: "HelveticaNeue", size: 17);
-        someLabel.text  =   "Test Message - A nice and good message";
-        someLabel.textColor     = UIColor.white;
-        someLabel.textAlignment = NSTextAlignment.center;
-        
-        popupView.addSubview(someLabel);
-        
-        popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: popupHeight);
- 
-        return;
-    }
-    
     
     /********************************************************************************************************************************/
     /** @fcn        genUpperBorderedView()
@@ -376,41 +369,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return;
     }
 
-    
-    /********************************************************************************************************************************/
-    /** @fcn        loadPopup(_ dir : Bool)
-     *  @brief      x
-     *  @details    x
-     */
-    /********************************************************************************************************************************/
-    func loadPopup(_ dir : Bool) {
-
-        if(dir == true) {
-            self.view.addSubview(self.popupView);
-
-            UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                if(verbose) { print("ViewController.loadPopup():         sliding popup in"); }
-                self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height-self.popupHeight, width: self.view.frame.width, height: self.popupHeight);
-            
-                }, completion: { (finished: Bool) -> Void in
-                    if(verbose) { print("ViewController.loadPopup():         sliding popup in completion"); }
-                    self.viewOne.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
-            });
-        } else {
-            if(verbose) { print("ViewController.loadPopup():         off"); }
-            UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
-                if(verbose) { print("ViewController.loadPopup():         sliding popup out"); }
-                self.viewOne.frame = UIScreen.main.bounds;
-                self.popupView.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: self.view.frame.width, height: self.popupHeight);
-                
-                }, completion: { (finished: Bool) -> Void in
-                    if(verbose) { print("ViewController.loadPopup():         sliding popup out completion"); }
-            });
-        }
-        
-        return;
-    }
-
 
     /********************************************************************************************************************************/
     /** @fcn        genTapResponse()
@@ -426,30 +384,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.view.addGestureRecognizer(tapGesture);
         
-        genPopupResp();
-        
         return;
     }
-    
-    
-    /********************************************************************************************************************************/
-    /** @fcn        genPopupResp()
-     *  @brief      x
-     *  @details    x
-     */
-    /********************************************************************************************************************************/
-    func genPopupResp() {
-        
-        let pop_tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.popupResp(_:)));
-        
-        pop_tapGesture.delegate = self;
-        
-        popupView.addGestureRecognizer(pop_tapGesture);
-        
-        return;
-    }
-    
-    
+
+
     /********************************************************************************************************************************/
     /** @fcn        addLabel(_ aView: UIView, dispStr : String, yCoord : CGFloat)
      *  @brief      x
@@ -592,23 +530,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         //let tappedView = sender.view as UIView!;
         return;
     }
-    
-    
-    /********************************************************************************************************************************/
-    /** @fcn        myPrimaryTapResponse2(_ sender: UITapGestureRecognizer)
-     *  @brief      x
-     *  @details    x
-     */
-    /********************************************************************************************************************************/
-    @objc func popupResp(_ sender: UITapGestureRecognizer) {
-        if(verbose) { print("ViewController.popupResp():         popupview selected, dismissing"); }
-        
-        loadPopup(false);
-        
-        return;
-    }
-    
-    
+
+
     /********************************************************************************************************************************/
     /** @fcn        press_launch(_ sender: UIButton!)
      *  @brief      x
@@ -663,25 +586,30 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
      *  @details    x
      */
     /********************************************************************************************************************************/
-    @objc func press_popupLaunch(_ sender: UIButton!) {
+    @objc func press_popupLaunch(_ sender: UIButton!) {                                                                               //[2]
         
-        if(verbose) { print("ViewController.press_popupLaunch(): popup launch was pressed"); }
+        let inProg = ViewUtils.popupInProg();
         
-        loadPopup(true);
-
+        if(!inProg) {
+            if(verbose) { print("ViewController.press_popupLaunch(): popup launch was pressed and launching now"); }
+            ViewUtils.popup("Test Message - A nice good test message");
+            
+        } else {
+            if(verbose) { print("ViewController.press_popupLaunch(): launch was attempted but already in progress, aborting"); }
+            
+        }
+        
+        self.reloadInputViews();
+        
         return;
     }
     
     
     /********************************************************************************************************************************/
-    /** @fcn        didReceiveMemoryWarning()
-     *  @brief      x
-     *  @details    x
-     */
+    /** @fcn        required init?(coder aDecoder: NSCoder)
+     *  @brief      x                                                                                                               */
     /********************************************************************************************************************************/
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning();
-    }
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented"); }
 }
 
 
